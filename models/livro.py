@@ -59,7 +59,7 @@ class Livro:
         livro_dict = asdict(self)
         livro_dict["data_cadastro"] = self.data_cadastro.isoformat()
         del livro_dict["id"]
-        return {self.id: livro_dict}
+        return livro_dict
 
     def __str__(self):
         """String com informação legível sobre o Livro."""
@@ -84,7 +84,7 @@ class Livro:
         return self.titulo == outro_livro.titulo and self.autor == outro_livro.autor and self.ano == outro_livro.ano
 
     def get_id(self):
-        return id_encode(f'{self.titulo}{self.autor}')
+        return id_encode(f'{self.titulo}')
 
     ####
     @classmethod
