@@ -1,0 +1,43 @@
+'''
+Módulo responsável por gerenciar a persistência
+dos livros no arquivo JSON.
+'''
+import json
+from pathlib import Path
+from models.livro import Livro
+from datetime import date
+
+# funções manipulação geral do json
+def salvar_json_livros(livrosObjetos:list, nome_json:str='livros.json'):
+    '''Atualiza o JSON com os objetos livros
+    no dict de execução da biblioteca.'''
+
+    #se dicionario
+
+    with open(nome_json, 'w') as f:
+        json.dump([
+            livro.to_dict() for livro in livrosObjetos
+        ], f) if livrosObjetos else json.dump([], f) # Se não houverem livros na lista, coloca um json vazio
+        #TODO: forma mais otimizada de salvar json, sem reescrever sempre do zero
+
+
+def carregar_livros_do_json(livrosObjetos=[], nome_json:str='livros.json'):
+    '''Carrega os livros no JSON para o dicionario de livros de execução'''
+    #caso livros.json não exista
+    if not Path(nome_json).is_file():
+        print(f'\n{nome_json} não encontrado.\nCriando novo arquivo...\n')
+        return salvar_json_livros(livrosObjetos, nome_json)
+
+    try:
+        with open(nome_json, 'r') as f:
+            livros_data = json.load(f)
+            for livro in livros_data:
+                livro_chaves = list(livro.keys())
+                livro_id_raw = livro_chaves.copy()[0]
+                livro_id_int = int(livro_id_raw)
+                livrosObjetos.append(Livro(**livro[livro_id_int]))
+            return livrosObjetos
+    except:
+        print(f'\nErro ao carregar {nome_json}.\nCriando backup...\n')
+        Path(nome_json).rename(f'BACKUP_livros_{date.today()}.json.bak')
+        return salvar_json_livros(livrosObjetos, nome_json) #tenta restaurar, via o que houver no dict usado em execução. Caso não consiga, retornará um novo json vazio.
