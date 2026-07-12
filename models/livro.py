@@ -13,10 +13,10 @@ class Livro:
     categoria: str
     lido: bool
     avaliacao: int | None = None
-    data_cadastro: str | None = None #recebida em ISO (ou vazio, caso não seja um livro cadastrado anteriormente)
+    data_cadastro: str | date | None = None #recebida em ISO (ou vazio, caso não seja um livro cadastrado anteriormente)
     id: int | None = None
 
-    #######    VALIDAÇÕES/ETC    #######
+    #######    VALIDAÇÕES    #######
     def __post_init__(self):
         ## Atributos Obrigatorios ##
         if not (self.titulo and self.autor and self.categoria):
@@ -43,14 +43,17 @@ class Livro:
             print(e) #Informa tratamentos
             self.avaliacao = np_clip(self.avaliacao, 1, 5) if self.lido else None
 
-        ### Data de cadastro
-        if self.data_cadastro is None: self.data_cadastro = date.today()
+        ### Data de cadastro (não é erro)
+        if self.data_cadastro is None:
+            self.data_cadastro = date.today()
+        elif isinstance(self.data_cadastro, str):
+            self.data_cadastro = date.fromisoformat(self.data_cadastro)
 
-        ### ID
+        ### ID (não é erro)
         if self.id is None:
-            self.id = id_encode(f'{self.titulo}{self.autor}')
+            self.id = self.get_id()
 
-    #### Funções
+    ####
     def to_dict(self):
         '''Obtem o JSON de um livro'''
         livro_dict = asdict(self)
@@ -61,7 +64,6 @@ class Livro:
     def __str__(self):
         """String com informação legível sobre o Livro."""
         return f'"{self.titulo}" ({self.ano}), {self.autor}.'
-
 
     def __repr__(self):
         """String com informação completa sobre o Livro.
@@ -81,17 +83,12 @@ class Livro:
 
         return self.titulo == outro_livro.titulo and self.autor == outro_livro.autor and self.ano == outro_livro.ano
 
+    def get_id(self):
+        return id_encode(f'{self.titulo}{self.autor}')
 
-    #### MÉTODOS DE CLASSE
+    ####
     @classmethod
     def from_dict(cls, livro_dict):
         """Cria e retorna uma instância de Livro a partir de um dicionário.
         """
-        #Converte data
-        data_cadastro = livro_dict["data_cadastro"]
-        data_cadastro = date.fromisoformat(data_cadastro) if data_cadastro is not None else None
-        livro_dict["data_cadastro"] = data_cadastro
-        
-
         return cls(**livro_dict)
-
