@@ -13,14 +13,26 @@ class Biblioteca:
         salvar_json_livros(self.livros) #atualiza json
 
     def editar_livro(self, id:int, livro_atualizado:dict):
-        
+        self.livros[id] = Livro.from_dict(livro_atualizado)
+        salvar_json_livros(self.livros) #atualiza json
 
     def excluir_livro(self, id:int): #TODO
         #Solicitar confirmação antes da exclusão.
-        pass
+        #TODO: fazer com que a confirmação apareça no tkinter em vez do terminal
+        if input(f'Deseja realmente excluir o livro "{self.livros[id].titulo}"? (s/n): ').lower() == "s":
+            del self.livros[id]
+            salvar_json_livros(self.livros) #atualiza json
+
 
     #funções de busca
-    def buscar(self, termo:str): #TODO
+    def buscar(self, termo:str, buscar_por:str): #TODO
         #obs:busca case-insensitive
-        pass
+        resultados = []
 
+        if buscar_por not in ['titulo', 'autor', 'categoria']:
+            raise ValueError('\nCampo de busca inválido.\nUse \'titulo\', \'autor\' ou \'categoria\'.')
+
+        for livro in self.livros:
+            if termo.lower() in livro.to_dict[buscar_por].lower():
+                resultados.append(livro)
+        return resultados
