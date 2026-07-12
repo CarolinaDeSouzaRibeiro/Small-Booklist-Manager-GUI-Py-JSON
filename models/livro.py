@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
 from datetime import date
 from numpy import clip
 
@@ -17,6 +17,10 @@ class Livro:
 
     #######     VALIDAÇÕES    #######
     def __post_init__(self):
+        ## Obrigatorias ##
+        if not (self.titulo and self.autor and self.categoria):
+            raise ValueError(f'\nErro fatal na criação do livro "{self.titulo}" ({self.ano}):\nTítulo, autor e categoria são obrigatórios.')
+
         ### Ano ##
         if self.ano > date.today().year:
             raise ValueError(
@@ -37,3 +41,33 @@ class Livro:
         except ValueError as e:
             print(e) #Informa tratamentos
             self.avaliacao = clip(self.avaliacao, 1, 5) if self.lido else None
+
+
+    #### Funções
+    def to_dict(self):
+        '''Obtem o JSON de um livro'''
+        return asdict(self)
+
+    def __str__(self):
+        """String com informação legível sobre o objeto Livro."""
+        return f'"{self.titulo}" ({self.ano}), {self.autor}.'
+
+
+    def __repr__(self):
+        """String com informação completa sobre o objeto Livro.
+        Escrita em forma da linha de código utilizada para instancia este livro."""
+        return f'Livro(id={self.id}, titulo={self.titulo}, autor={self.autor}, ano={self.ano}, avaliacao={self.avaliacao}, categoria={self.categoria}, lido={self.lido}, data_cadastro={self.data_cadastro})'
+
+    def __eq__(self, outro_livro):
+        """Compara o Livro com outro objeto Livro.
+
+        São considerados iguais ao ter os mesmos:
+        + Titulo
+        + Autor
+        + Ano
+        """
+        if not isinstance(outro_livro, Livro):
+            raise TypeError(f'Erro fatal na comparação no livro "{self.titulo}" ({self.ano}):\nNão é possível comparar um objeto Livro com um objeto do tipo{type(outro_livro)}.')
+
+        return self.titulo == outro_livro.titulo and self.autor == outro_livro.autor and self.ano == outro_livro.ano
+
