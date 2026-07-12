@@ -15,9 +15,9 @@ def salvar_json_livros(livrosObjetos:list, nome_json:str='livros.json'):
     #se dicionario
 
     with open(nome_json, 'w') as f:
-        json.dump([
-            livro.to_dict() for livro in livrosObjetos
-        ], f) if livrosObjetos else json.dump([], f) # Se não houverem livros na lista, coloca um json vazio
+        json.dump(
+            {livro.get_id(): livro.to_dict() for livro in livrosObjetos
+             }, f) if livrosObjetos else json.dump({}, f) # Se não houverem livros na lista, coloca um json vazio
         #TODO: forma mais otimizada de salvar json, sem reescrever sempre do zero
 
 
@@ -31,11 +31,10 @@ def carregar_livros_do_json(livrosObjetos=[], nome_json:str='livros.json'):
     try:
         with open(nome_json, 'r') as f:
             livros_data = json.load(f)
-            for livro in livros_data:
-                livro_chaves = list(livro.keys())
-                livro_id_raw = livro_chaves.copy()[0]
-                livro_id_int = int(livro_id_raw)
-                livrosObjetos.append(Livro(**livro[livro_id_int]))
+            for livro_id_raw in livros_data:
+                livro_dict = livros_data[livro_id_raw]
+                livro_objeto = Livro.from_dict(livro_dict)
+                livrosObjetos[livro_id_raw] = livro_objeto
             return livrosObjetos
     except:
         print(f'\nErro ao carregar {nome_json}.\nCriando backup...\n')
