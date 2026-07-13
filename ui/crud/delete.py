@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from ui.restart import restart_ui
 # from ui.app import app
 
 

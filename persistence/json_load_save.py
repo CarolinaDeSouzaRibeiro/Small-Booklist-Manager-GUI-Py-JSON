@@ -32,9 +32,11 @@ def carregar_livros_do_json(livrosObjetos={}, nome_json:str='livros.json'):
         with open(nome_json, 'r') as f:
             livros_data = json.load(f)
             for livro_id_raw in livros_data:
-                livro_dict = livros_data[livro_id_raw]
-                livro_objeto = Livro.from_dict(livro_dict)
-                livrosObjetos[livro_id_raw] = livro_objeto
+                #evita que o mesmo livro seja carregado mais de uma vez
+                if not livro_id_raw in livrosObjetos:
+                    livro_dict = livros_data[livro_id_raw]
+                    livro_objeto = Livro.from_dict(livro_dict)
+                    livrosObjetos[livro_id_raw] = livro_objeto
             return livrosObjetos
     except:
         print(f'\nErro ao carregar {nome_json}.\nCriando backup...\n')

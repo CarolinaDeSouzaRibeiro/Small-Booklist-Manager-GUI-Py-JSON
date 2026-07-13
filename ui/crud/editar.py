@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from ui.restart import restart_ui
 # from ui.app import app
 
 
@@ -78,6 +79,7 @@ def editar_livro(tabela_livros, biblioteca, root, colunas_labels_para_telas_crud
         tela.destroy()
         # root.destroy
         # app()
+        restart_ui(root)
 
     btn_salvar = tk.Button(tela_edicao, text="Salvar", command=lambda: salvar_edicao(livro_obj, entries['titulo'].get(), entries['autor'].get(), entries['categoria'].get(), entries['ano'].get(), lido_var.get(), avaliacao_var.get(), tela_edicao))
     btn_salvar.pack(pady=10)

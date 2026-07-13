@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from ui.restart import restart_ui
 # from ui.app import app
 
 def adicionar_livro(biblioteca, root, colunas_labels_para_telas_crud):
@@ -64,8 +65,7 @@ def adicionar_livro(biblioteca, root, colunas_labels_para_telas_crud):
 
         biblioteca.adicionar_livro(novo_livro_dict)
         tela.destroy()
-        # root.destroy
-        # app()
+        restart_ui(root)
 
     btn_add = tk.Button(tela_edicao, text="Adicionar", command=lambda: btn_adicionar_livro(entries['titulo'].get(), entries['autor'].get(), entries['categoria'].get(), entries['ano'].get(), lido_var.get(), avaliacao_var.get(), tela_edicao))
     btn_add.pack(pady=10)

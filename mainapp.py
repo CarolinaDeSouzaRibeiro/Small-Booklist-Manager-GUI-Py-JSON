@@ -7,6 +7,7 @@ from tkinter import ttk
 biblioteca = Biblioteca()
 
 root = tk.Tk()
+root.title("Biblioteca")
 root.geometry("600x400")
 
 colunas_labels = {'Titulo':'titulo', 'Autor':'autor', 'Categoria':'categoria', 'Ano':'ano', 'Lido':'lido', 'Avaliação':'avaliacao', 'Data de Cadastro':'data_cadastro', 'ID interno':'id'}
@@ -44,5 +45,10 @@ btn_editar.pack(side="left", padx=5, pady=5)
 btn_excluir = tk.Button(root, text="Excluir Livro", command=lambda: btn_deletar_livro(tabela_livros, biblioteca, root))
 btn_excluir.pack(side="left", padx=5, pady=5)
 
+
+#busca
+from ui.busca import btn_buscar_livro
+btn_buscar = tk.Button(root, text="Buscar Livro", command=lambda:btn_buscar_livro(root,biblioteca,tabela_livros))
+btn_buscar.pack(side="left", padx=5, pady=5)
 
 root.mainloop()

@@ -29,7 +29,7 @@ class Biblioteca:
         if buscar_por not in ['titulo', 'autor', 'categoria']:
             raise ValueError('\nCampo de busca inválido.\nUse \'titulo\', \'autor\' ou \'categoria\'.')
 
-        for livro in self.livros:
-            if termo.lower() in livro.to_dict[buscar_por].lower():
+        for livro in self.livros.values():
+            if termo.lower() in livro.to_dict()[buscar_por].lower():
                 resultados.append(livro)
         return resultados
