@@ -18,7 +18,7 @@ def salvar_json_livros(livrosObjetos:dict, nome_json:str='livros.json'):
     with open(nome_json, 'w') as f:
         json.dump(
             {livro.get_id(): livro.to_dict() for livro in livrosObjetos.values()
-             }, f) if livrosObjetos else json.dump({}, f) # Se não houverem livros na lista, coloca um json vazio
+            }, f) if livrosObjetos else json.dump({}, f) # Se não houverem livros na lista, coloca um json vazio
         #TODO: forma mais otimizada de salvar json, sem reescrever sempre do zero
 
 def carregar_livros_do_json(livrosObjetos={}, nome_json:str='livros.json'):
