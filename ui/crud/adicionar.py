@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
+# from ui.app import app
 
-
-def adicionar_livro(tabela_livros, biblioteca, root, colunas_labels_para_telas_crud):
+def adicionar_livro(biblioteca, root, colunas_labels_para_telas_crud):
     #pega a coluna selecionada na tabela
 
     tela_edicao = tk.Toplevel(root)
@@ -32,7 +32,7 @@ def adicionar_livro(tabela_livros, biblioteca, root, colunas_labels_para_telas_c
     avaliacao_var = tk.StringVar(value=None)
     avaliacao_combobox = ttk.Combobox(tela_edicao, textvariable=avaliacao_var, values=[i for i in range(1, 6)], state="readonly")
     #checkbox de lido
-    lido_var = tk.BooleanVar(False)
+    lido_var = tk.BooleanVar(value=False)
     tk.Label(tela_edicao, text="Lido:").pack()
     tk.Checkbutton(tela_edicao, text="Lido", variable=lido_var, command=atualizar_estado_combobox).pack()
 
@@ -44,7 +44,7 @@ def adicionar_livro(tabela_livros, biblioteca, root, colunas_labels_para_telas_c
 
     #Botão de salvar.
     #Desabilitado se os campos obrigatorios forem vazios ou se lido for verdadeiro enquanto avaliação for vazia
-    def adicionar_livro(titulo, autor, categoria, ano, lido, avaliacao, tela):
+    def btn_adicionar_livro(titulo, autor, categoria, ano, lido, avaliacao, tela):
         # if not titulo or not autor or not categoria or not ano:
         #     tk.messagebox.showerror("Erro", "Todos os campos obrigatórios devem ser preenchidos.")
         #     return
@@ -64,8 +64,10 @@ def adicionar_livro(tabela_livros, biblioteca, root, colunas_labels_para_telas_c
 
         biblioteca.adicionar_livro(novo_livro_dict)
         tela.destroy()
-    
-    btn_add = tk.Button(tela_edicao, text="Adicionar", command=lambda: adicionar_livro(entries['titulo'].get(), entries['autor'].get(), entries['categoria'].get(), entries['ano'].get(), lido_var.get(), avaliacao_var.get(), tela_edicao))
+        # root.destroy
+        # app()
+
+    btn_add = tk.Button(tela_edicao, text="Adicionar", command=lambda: btn_adicionar_livro(entries['titulo'].get(), entries['autor'].get(), entries['categoria'].get(), entries['ano'].get(), lido_var.get(), avaliacao_var.get(), tela_edicao))
     btn_add.pack(pady=10)
 
     atualizar_estado_combobox() #atualizacao inicial

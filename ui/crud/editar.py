@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
+# from ui.app import app
+
 
 def editar_livro(tabela_livros, biblioteca, root, colunas_labels_para_telas_crud):
     #pega a coluna selecionada na tabela
@@ -73,14 +75,12 @@ def editar_livro(tabela_livros, biblioteca, root, colunas_labels_para_telas_crud
 
         biblioteca.editar_livro(livro.id, livro_atualizado_dict)
 
-        #atualiza tabela
-        for item in tabela_livros.get_children():
-            if tabela_livros.item(item)['values'][-1] == livro.id:
-                tabela_livros.item(item, values=(livro.titulo, livro.autor, livro.categoria, livro.ano, livro.lido, livro.avaliacao, livro.data_cadastro, livro.id))
-                break
-
         tela.destroy()
+        # root.destroy
+        # app()
+
     btn_salvar = tk.Button(tela_edicao, text="Salvar", command=lambda: salvar_edicao(livro_obj, entries['titulo'].get(), entries['autor'].get(), entries['categoria'].get(), entries['ano'].get(), lido_var.get(), avaliacao_var.get(), tela_edicao))
     btn_salvar.pack(pady=10)
 
     atualizar_estado_combobox() #atualizacao inicial
+

@@ -9,23 +9,20 @@ class Biblioteca:
     #funções crud
     def adicionar_livro(self, novo_livro_dict:dict):
         novo_livro_obj = Livro.from_dict(novo_livro_dict)
-        self.livros.append(novo_livro_obj)
+        self.livros[novo_livro_obj.id] = novo_livro_obj
         salvar_json_livros(self.livros) #atualiza json
 
     def editar_livro(self, id:int, livro_atualizado:dict):
         self.livros[id] = Livro.from_dict(livro_atualizado)
         salvar_json_livros(self.livros) #atualiza json
 
-    def excluir_livro(self, id:int): #TODO
-        #Solicitar confirmação antes da exclusão.
-        #TODO: fazer com que a confirmação apareça no tkinter em vez do terminal
-        if input(f'Deseja realmente excluir o livro "{self.livros[id].titulo}"? (s/n): ').lower() == "s":
-            del self.livros[id]
-            salvar_json_livros(self.livros) #atualiza json
+    def excluir_livro(self, id:int):
+        del self.livros[f'{id}']
+        salvar_json_livros(self.livros) #atualiza json
 
 
     #funções de busca
-    def buscar(self, termo:str, buscar_por:str): #TODO
+    def buscar(self, termo:str, buscar_por:str):
         #obs:busca case-insensitive
         resultados = []
 
