@@ -23,7 +23,7 @@ class Livro:
             raise ValueError(f'\nErro fatal na criação do livro "{self.titulo}" ({self.ano}):\nTítulo, autor e categoria são obrigatórios.')
 
         ### Ano ##
-        if self.ano > date.today().year:
+        if int(self.ano) > date.today().year:
             raise ValueError(
                 f'\nErro fatal na criação do livro "{self.titulo}" ({self.ano}):\nAno de publicação fornecido ({self.ano}) é um ano futuro.'
                 )
@@ -37,7 +37,7 @@ class Livro:
         try: #Tratáveis, uso try/except
             if not self.lido and self.avaliacao is not None:
                 raise ValueError(f'\nErro na criação do livro "{self.titulo}" ({self.ano}):\nAvaliação não pode ser fornecida á livros não lidos.\nAvaliação será automaticamente mudada para None.')
-            if self.lido and not 1 <= self.avaliacao <= 5:
+            if self.lido and not 1 <= int(self.avaliacao) <= 5:
                 raise ValueError(f'\nErro na criação do livro "{self.titulo}" ({self.ano}):\nAvaliação fornecida ({self.avaliacao}) está fora do intervalo permitido (1 a 5)\nAvaliação será automaticamente mudada para o valor mais proximo válido.')
         except ValueError as e:
             print(e) #Informa tratamentos
@@ -62,13 +62,12 @@ class Livro:
         return livro_dict
 
     def __str__(self):
-        """String com informação legível sobre o Livro."""
+        """String com informação resumida sobre o Livro."""
         return f'"{self.titulo}" ({self.ano}), {self.autor}.'
 
     def __repr__(self):
-        """String com informação completa sobre o Livro.
-        Escrita em forma da linha de código utilizada para instanciar este livro."""
-        return f'Livro(id={self.id}, titulo={self.titulo}, autor={self.autor}, ano={self.ano}, avaliacao={self.avaliacao}, categoria={self.categoria}, lido={self.lido}, data_cadastro={self.data_cadastro})'
+        """String com informação completa sobre o Livro."""
+        return f'ID:{self.id}\nTitulo:{self.titulo}"\nAno:{self.ano}\nAutor:{self.autor}.\nAvaliacao={self.avaliacao}\nCategoria={self.categoria}\nLido={self.lido}\nData_cadastro={self.data_cadastro})'
 
     def __eq__(self, outro_livro):
         """Compara o Livro com outro objeto Livro.
