@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+
 def editar_livro(tabela_livros, biblioteca, root, colunas_labels_para_telas_crud):
     #pega a coluna selecionada na tabela
     livro_selecionado = tabela_livros.selection()
