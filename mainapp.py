@@ -27,10 +27,14 @@ colunas_labels_para_telas_crud= {'Titulo':'titulo', 'Autor':'autor', 'Categoria'
 
 #funções para os botões
 from ui.crud.editar import editar_livro
+from ui.crud.adicionar import adicionar_livro
+
+import tkinter as tk
+from tkinter import ttk
 
 
 #botões
-btn_adicionar = tk.Button(root, text="Adicionar Livro")
+btn_adicionar = tk.Button(root, text="Adicionar Livro", command=lambda: adicionar_livro(tabela_livros, biblioteca, root, colunas_labels_para_telas_crud)    )
 btn_adicionar.pack(side="left", padx=5, pady=5)
 
 btn_editar = tk.Button(root, text="Editar Livro", command=lambda: editar_livro(tabela_livros, biblioteca, root, colunas_labels_para_telas_crud))
