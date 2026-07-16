@@ -31,20 +31,20 @@ def start_ui(oldroot=None):
     colunas_labels_para_telas_crud= {'Titulo':'titulo', 'Autor':'autor', 'Categoria':'categoria', 'Ano':'ano'}
 
     #funções para os botões
-    from ui.crud import editar_livro, adicionar_livro, btn_deletar_livro, btn_buscar_livro
+    from ui.crud import popup_editar_livro, popup_adicionar_livro, popup_deletar_livro, btn_buscar_livro
 
     import tkinter as tk
     from tkinter import ttk
 
 
     #botões
-    btn_adicionar = tk.Button(newroot, text="Adicionar Livro", command=lambda: adicionar_livro(biblioteca, newroot, colunas_labels_para_telas_crud)    )
+    btn_adicionar = tk.Button(newroot, text="Adicionar Livro", command=lambda: popup_adicionar_livro(biblioteca, newroot, colunas_labels_para_telas_crud)    )
     btn_adicionar.pack(side="left", padx=5, pady=5)
 
-    btn_editar = tk.Button(newroot, text="Editar Livro", command=lambda: editar_livro(tabela_livros, biblioteca, newroot, colunas_labels_para_telas_crud))
+    btn_editar = tk.Button(newroot, text="Editar Livro", command=lambda: popup_editar_livro(tabela_livros, biblioteca, newroot, colunas_labels_para_telas_crud))
     btn_editar.pack(side="left", padx=5, pady=5)
 
-    btn_excluir = tk.Button(newroot, text="Excluir Livro", command=lambda: btn_deletar_livro(tabela_livros, biblioteca, newroot))
+    btn_excluir = tk.Button(newroot, text="Excluir Livro", command=lambda: popup_deletar_livro(tabela_livros, biblioteca, newroot))
     btn_excluir.pack(side="left", padx=5, pady=5)
 
     #busca
