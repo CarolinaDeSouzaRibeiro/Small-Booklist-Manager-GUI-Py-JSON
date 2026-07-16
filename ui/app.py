@@ -1,8 +1,5 @@
-from services.biblioteca import Biblioteca
-import tkinter as tk
-from tkinter import ttk
-
 def start_ui(oldroot=None):
+    from services.biblioteca import Biblioteca
     import tkinter as tk
     from tkinter import ttk
 
