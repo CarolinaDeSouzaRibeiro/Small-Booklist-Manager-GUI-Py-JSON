@@ -5,8 +5,7 @@ dos livros no arquivo JSON.
 import json
 from pathlib import Path
 from models.livro import Livro
-from datetime import date
-# import datetime
+import datetime
 
 # funções manipulação geral do json
 def salvar_json_livros(livrosObjetos:dict, nome_json:str='livros.json'):
@@ -40,5 +39,5 @@ def carregar_livros_do_json(livrosObjetos={}, nome_json:str='livros.json'):
             return livrosObjetos
     except:
         print(f'\nErro ao carregar {nome_json}.\nCriando backup...\n')
-        Path(nome_json).rename(f'BACKUP_livros_{date.today().strftime("%Y-%m-%d_%H-%M-%S")}.json.bak')
+        Path(nome_json).rename(f'BACKUP_livros_{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.json.bak')
         return salvar_json_livros(livrosObjetos, nome_json) #tenta restaurar, via o que houver no dict usado em execução. Caso não consiga, retornará um novo json vazio.
