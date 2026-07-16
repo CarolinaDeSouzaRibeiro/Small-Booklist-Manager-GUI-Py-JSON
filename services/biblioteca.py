@@ -17,8 +17,9 @@ class Biblioteca:
         salvar_json_livros(self.livros) #atualiza json
 
     def excluir_livro(self, id:int):
-        del self.livros[f'{id}']
-        salvar_json_livros(self.livros) #atualiza json
+        if f'{id}' in self.livros:
+            del self.livros[f'{id}']
+            salvar_json_livros(self.livros) #atualiza json
 
 
     #funções de busca
@@ -30,6 +31,6 @@ class Biblioteca:
             raise ValueError('\nCampo de busca inválido.\nUse \'titulo\', \'autor\' ou \'categoria\'.')
 
         for livro in self.livros.values():
-            if termo.lower() in livro.to_dict()[buscar_por].lower():
+            if termo.lower() in livro.to_dict().get(buscar_por, '').lower():
                 resultados.append(livro)
         return resultados
