@@ -2,11 +2,12 @@ from services.biblioteca import Biblioteca
 import tkinter as tk
 from tkinter import ttk
 
-def restart_ui(oldroot):
+def start_ui(oldroot=None):
     import tkinter as tk
     from tkinter import ttk
 
-    oldroot.destroy()
+    if oldroot:
+        oldroot.destroy()
 
     biblioteca = Biblioteca()
 
@@ -33,9 +34,7 @@ def restart_ui(oldroot):
     colunas_labels_para_telas_crud= {'Titulo':'titulo', 'Autor':'autor', 'Categoria':'categoria', 'Ano':'ano'}
 
     #funções para os botões
-    from ui.crud.editar import editar_livro
-    from ui.crud.adicionar import adicionar_livro
-    from ui.crud.delete import btn_deletar_livro
+    from ui.crud import editar_livro, adicionar_livro, btn_deletar_livro, btn_buscar_livro
 
     import tkinter as tk
     from tkinter import ttk
@@ -51,6 +50,9 @@ def restart_ui(oldroot):
     btn_excluir = tk.Button(newroot, text="Excluir Livro", command=lambda: btn_deletar_livro(tabela_livros, biblioteca, newroot))
     btn_excluir.pack(side="left", padx=5, pady=5)
 
+    #busca
+    btn_buscar = tk.Button(newroot, text="Buscar Livro", command=lambda:btn_buscar_livro(newroot,biblioteca,tabela_livros))
+    btn_buscar.pack(side="left", padx=5, pady=5)
 
     newroot.mainloop()
 
