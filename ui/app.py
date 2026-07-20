@@ -33,10 +33,6 @@ def start_ui(oldroot=None):
     #funções para os botões
     from ui.crud import popup_editar_livro, popup_adicionar_livro, popup_deletar_livro, btn_buscar_livro
 
-    import tkinter as tk
-    from tkinter import ttk
-
-
     #botões
     btn_adicionar = tk.Button(newroot, text="Adicionar Livro", command=lambda: popup_adicionar_livro(biblioteca, newroot, colunas_labels_para_telas_crud)    )
     btn_adicionar.pack(side="left", padx=5, pady=5)
