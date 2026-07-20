@@ -20,9 +20,6 @@ def atualizar_estado_combobox(avaliacao_combobox, lido_var, avaliacao_var, btn):
     Impede acesso ao combobox caso o livro não tenha sido marcado como lido.
     Impede acesso ao botão caso o livro tenha sido marcado como lido, mas nenhuma avaliação foi selecionada.
     '''
-    #estado combobox
-    # estado_combobox = "normal" if lido_var.get() else "disabled"
-    # estado_btn = "normal" if lido_var.get() and avaliacao_var.get() else "disabled"
     print(f'Avaliado. {avaliacao_var.get()}/5') if avaliacao_var.get() else print("Não avaliado.")
     print ('Lido') if lido_var.get() else print("Não lido.")
 
