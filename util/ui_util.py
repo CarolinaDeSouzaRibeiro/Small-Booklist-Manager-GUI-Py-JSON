@@ -14,11 +14,22 @@ def get_livro_from_table_selection(tabela_livros):
         return None, None
 
 
-def atualizar_estado_combobox(avaliacao_combobox, lido_var, avaliacao_var, btn_add):
-    avaliacao_combobox.config(state="normal" if lido_var.get() else "disabled")
-    #se estiver vazio enquanto lido for verdadeiro, desabilita o botão de salvar
-    if lido_var.get() and not avaliacao_var.get():
-        btn_add.config(state="disabled")
-    else:
-        btn_add.config(state="normal")
+def atualizar_estado_combobox(avaliacao_combobox, lido_var, avaliacao_var, btn):
+    '''Modifica estado da combobox de avaliação e do botão de salvar com base na avaliação e se o livro foi lido ou não
+
+    Impede acesso ao combobox caso o livro não tenha sido marcado como lido.
+    Impede acesso ao botão caso o livro tenha sido marcado como lido, mas nenhuma avaliação foi selecionada.
+    '''
+    #estado combobox
+    # estado_combobox = "normal" if lido_var.get() else "disabled"
+    # estado_btn = "normal" if lido_var.get() and avaliacao_var.get() else "disabled"
+    print(f'Avaliado. {avaliacao_var.get()}/5') if avaliacao_var.get() else print("Não avaliado.")
+    print ('Lido') if lido_var.get() else print("Não lido.")
+
+    estado_combo = "disabled" if not lido_var.get() else "normal"
+    estado_btn = "disabled" if lido_var.get() and not avaliacao_var.get() else "normal"
+    print(f"Estado do botão:{estado_btn}\nEstado do combobox:{estado_combo}\n")
+
+    avaliacao_combobox.config(state=estado_combo)
+    btn.config(state=estado_btn)
 

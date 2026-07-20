@@ -31,10 +31,13 @@ def popup_adicionar_livro(biblioteca, root, colunas_labels_para_telas_crud):
     #mas nao da pack ainda
     avaliacao_var = tk.StringVar(value=None)
     avaliacao_combobox = ttk.Combobox(tela_edicao, textvariable=avaliacao_var, values=[i for i in range(1, 6)], state="readonly")
+    #evento de atualizacao de estado é trigado ao mudar combobox
+    avaliacao_combobox.bind("<<ComboboxSelected>>", lambda event: atualizar_estado_combobox(avaliacao_combobox, lido_var, avaliacao_var, btn_add))
+
     #checkbox de lido
     lido_var = tk.BooleanVar(value=False)
     tk.Label(tela_edicao, text="Lido:").pack()
-    tk.Checkbutton(tela_edicao, text="Lido", variable=lido_var, command=atualizar_estado_combobox).pack()
+    tk.Checkbutton(tela_edicao, text="Lido", variable=lido_var, command=lambda: atualizar_estado_combobox(avaliacao_combobox, lido_var, avaliacao_var, btn_add)).pack()
 
     #label da combobox de avaliação
     tk.Label(tela_edicao, text="Avaliação:").pack()
@@ -98,6 +101,9 @@ def popup_editar_livro(tabela_livros, biblioteca, root, colunas_labels_para_tela
     #mas nao da pack ainda
     avaliacao_var = tk.StringVar(value=livro_obj.avaliacao)
     avaliacao_combobox = ttk.Combobox(tela_edicao, textvariable=avaliacao_var, values=[i for i in range(1, 6)], state="readonly")
+    #evento de atualizacao de estado é trigado ao mudar combobox
+    avaliacao_combobox.bind("<<ComboboxSelected>>", lambda event: atualizar_estado_combobox(avaliacao_combobox, lido_var, avaliacao_var, btn_salvar))
+
     #checkbox de lido
     lido_var = tk.BooleanVar(value=livro_obj.lido)
     tk.Label(tela_edicao, text="Lido:").pack()
