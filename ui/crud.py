@@ -18,15 +18,6 @@ def popup_adicionar_livro(biblioteca, root, colunas_labels_para_telas_crud):
         entries[atrib] = entry
         entry.pack()
 
-    #função para atualizar o estado do combobox de avaliação
-    def atualizar_estado_combobox():
-        avaliacao_combobox.config(state="normal" if lido_var.get() else "disabled")
-        #se estiver vazio enquanto lido for verdadeiro, desabilita o botão de salvar
-        if lido_var.get() and not avaliacao_var.get():
-            btn_add.config(state="disabled")
-        else:
-            btn_add.config(state="normal")
-
     #para avaliação, cria um combobox com opções de 1 a 5, e apenas disponivel se lido for verdadeiro
     #mas nao da pack ainda
     avaliacao_var = tk.StringVar(value=None)
@@ -74,7 +65,7 @@ def popup_adicionar_livro(biblioteca, root, colunas_labels_para_telas_crud):
     btn_add = tk.Button(tela_edicao, text="Adicionar", command=lambda: subbtn_adicionar_livro(entries['titulo'].get(), entries['autor'].get(), entries['categoria'].get(), entries['ano'].get(), lido_var.get(), avaliacao_var.get(), tela_edicao))
     btn_add.pack(pady=10)
 
-    atualizar_estado_combobox() #atualizacao inicial
+    atualizar_estado_combobox(avaliacao_combobox, lido_var, avaliacao_var, btn_add) #atualizacao inicial
 
 
 def popup_editar_livro(tabela_livros, biblioteca, root, colunas_labels_para_telas_crud):
