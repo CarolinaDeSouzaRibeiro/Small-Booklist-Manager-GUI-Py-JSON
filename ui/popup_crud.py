@@ -2,9 +2,8 @@ from models.livro import Livro
 import tkinter as tk
 from tkinter import ttk
 from services.biblioteca import Biblioteca
-from ui.tabela.tabela_manuseio import inserir_livro_tabela
+from ui.tabela.tabela_manuseio import inserir_livro_tabela, editar_livro_tabela
 from util.ui_util import atualizar_estado_combo_e_btn
-from ui.tabela.tabela_manuseio import editar_livro_tabela
 
 def subbtn_salvar_livro(livro_novo:dict, biblioteca:Biblioteca, tabela_livros:ttk.Treeview, tela_popup:tk.Toplevel, livro_velho:Livro=None):
         '''Salva alterações ou adição de um livro na biblioteca e na tabela da GUI.
