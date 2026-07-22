@@ -1,1 +1,92 @@
-{"148143478941646184447274979916360804723": {"titulo": "O Senhor dos An\u00e9is", "autor": "J.R.R. Tolkien", "ano": 1954, "categoria": "Fantasia", "lido": false, "avaliacao": null, "data_cadastro": "2026-07-12"}, "121418782497297278885327471": {"titulo": "Dom Casmurro", "autor": "Machado de Assis", "ano": 1899, "categoria": "Romance", "lido": true, "avaliacao": 4, "data_cadastro": "2026-07-13"}, "2171836357741788147521584554913744059078828403": {"titulo": "A Culpa \u00e9 das Estrelas", "autor": "John Green", "ano": 2012, "categoria": "Romance", "lido": false, "avaliacao": null, "data_cadastro": "2026-07-12"}, "9066495614755233391784535356513": {"titulo": "Romeu e Julieta", "autor": "William Shakespeare", "ano": 1597, "categoria": "Romance", "lido": false, "avaliacao": null, "data_cadastro": "2026-07-12"}, "556345353636376840790659570910339332615804184929": {"titulo": "As Cr\u00f4nicas de N\u00e1rnia", "autor": "C.S. Lewis", "ano": 1950, "categoria": "Fantasia", "lido": true, "avaliacao": 4, "data_cadastro": "2026-07-13"}, "2171920743793470113224003148509455372398851695": {"titulo": "Admir\u00e1vel Mundo Novo", "autor": "Aldous Huxley", "ano": 1932, "categoria": "Fic\u00e7\u00e3o Cient\u00edfica", "lido": true, "avaliacao": 5, "data_cadastro": "2026-07-13"}, "1685417569": {"titulo": "Duna", "autor": "Frank Herbert", "ano": 1965, "categoria": "Fic\u00e7\u00e3o Cient\u00edfica", "lido": false, "avaliacao": null, "data_cadastro": "2026-07-13"}, "7598805550979707745": {"titulo": "It: A Coisa", "autor": "Stephen King", "ano": 1986, "categoria": "Terror", "lido": false, "avaliacao": null, "data_cadastro": "2026-07-13"}, "7238062649063599201": {"titulo": "Dr\u00e1cula", "autor": "Bram Stoker", "ano": 1897, "categoria": "Terror", "lido": false, "avaliacao": null, "data_cadastro": "2026-07-13"}, "142441804562500909250127243452543146334517295931763": {"titulo": "A Volta ao Mundo em 80 Dias", "autor": "J\u00falio Verne", "ano": 1873, "categoria": "Aventura", "lido": false, "avaliacao": null, "data_cadastro": "2026-07-13"}, "499918271589": {"titulo": "teste", "autor": "aut", "ano": 1234, "categoria": "tes", "lido": false, "avaliacao": null, "data_cadastro": "2026-07-21"}, "7631732": {"titulo": "tst", "autor": "q13e", "ano": 11, "categoria": "q3t", "lido": false, "avaliacao": null, "data_cadastro": "2026-07-21"}}
+{
+  "148143478941646184447274979916360804723": {
+    "titulo": "O Senhor dos An\u00e9is",
+    "autor": "J.R.R. Tolkien",
+    "ano": 1954,
+    "categoria": "Fantasia",
+    "lido": false,
+    "avaliacao": null,
+    "data_cadastro": "2026-07-12"
+  },
+  "121418782497297278885327471": {
+    "titulo": "Dom Casmurro",
+    "autor": "Machado de Assis",
+    "ano": 1899,
+    "categoria": "Romance",
+    "lido": true,
+    "avaliacao": 4,
+    "data_cadastro": "2026-07-13"
+  },
+  "2171836357741788147521584554913744059078828403": {
+    "titulo": "A Culpa \u00e9 das Estrelas",
+    "autor": "John Green",
+    "ano": 2012,
+    "categoria": "Romance",
+    "lido": false,
+    "avaliacao": null,
+    "data_cadastro": "2026-07-12"
+  },
+  "9066495614755233391784535356513": {
+    "titulo": "Romeu e Julieta",
+    "autor": "William Shakespeare",
+    "ano": 1597,
+    "categoria": "Romance",
+    "lido": false,
+    "avaliacao": null,
+    "data_cadastro": "2026-07-12"
+  },
+  "556345353636376840790659570910339332615804184929": {
+    "titulo": "As Cr\u00f4nicas de N\u00e1rnia",
+    "autor": "C.S. Lewis",
+    "ano": 1950,
+    "categoria": "Fantasia",
+    "lido": true,
+    "avaliacao": 4,
+    "data_cadastro": "2026-07-13"
+  },
+  "2171920743793470113224003148509455372398851695": {
+    "titulo": "Admir\u00e1vel Mundo Novo",
+    "autor": "Aldous Huxley",
+    "ano": 1932,
+    "categoria": "Fic\u00e7\u00e3o Cient\u00edfica",
+    "lido": true,
+    "avaliacao": 5,
+    "data_cadastro": "2026-07-13"
+  },
+  "1685417569": {
+    "titulo": "Duna",
+    "autor": "Frank Herbert",
+    "ano": 1965,
+    "categoria": "Fic\u00e7\u00e3o Cient\u00edfica",
+    "lido": false,
+    "avaliacao": null,
+    "data_cadastro": "2026-07-13"
+  },
+  "7598805550979707745": {
+    "titulo": "It: A Coisa",
+    "autor": "Stephen King",
+    "ano": 1986,
+    "categoria": "Terror",
+    "lido": false,
+    "avaliacao": null,
+    "data_cadastro": "2026-07-13"
+  },
+  "7238062649063599201": {
+    "titulo": "Dr\u00e1cula",
+    "autor": "Bram Stoker",
+    "ano": 1897,
+    "categoria": "Terror",
+    "lido": false,
+    "avaliacao": null,
+    "data_cadastro": "2026-07-13"
+  },
+  "142441804562500909250127243452543146334517295931763": {
+    "titulo": "A Volta ao Mundo em 80 Dias",
+    "autor": "J\u00falio Verne",
+    "ano": 1873,
+    "categoria": "Aventura",
+    "lido": false,
+    "avaliacao": null,
+    "data_cadastro": "2026-07-13"
+  }
+}
