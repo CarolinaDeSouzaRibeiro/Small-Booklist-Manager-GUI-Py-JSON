@@ -25,7 +25,7 @@ def onclick_btn_editar_livro(root, biblioteca, tabela_livros, colunas_labels_par
         biblioteca,
         tabela_livros,
         colunas_labels_para_telas_crud,
-        livro_obj=livro_obj
+        livro_preexistente_obj=livro_obj
     )
 
 
