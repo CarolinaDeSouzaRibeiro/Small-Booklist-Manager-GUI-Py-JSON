@@ -5,23 +5,25 @@ from ui.app import start_ui
 from util.ui_util import get_livro_from_table_selection, atualizar_estado_combobox
 from ui.popup_crud import popup_crud_livro
 
-def onclick_btn_add_livro(biblioteca, root, colunas_labels_para_telas_crud):
+def onclick_btn_add_livro(root, biblioteca, tabela_livros, colunas_labels_para_telas_crud):
     popup_crud_livro(
-        biblioteca,
         root,
+        biblioteca,
+        tabela_livros,
         colunas_labels_para_telas_crud
     )
 
 
-def onclick_btn_editar_livro(tabela_livros, biblioteca, root, colunas_labels_para_telas_crud):
+def onclick_btn_editar_livro(root, biblioteca, tabela_livros, colunas_labels_para_telas_crud):
     livro_id, livro_selecionado = get_livro_from_table_selection(tabela_livros)
     if not livro_id: return #sem seleção, apenas ignorar clique do botão
 
     livro_obj = biblioteca.livros.get(f'{livro_id}')
 
     popup_crud_livro(
-        biblioteca,
         root,
+        biblioteca,
+        tabela_livros,
         colunas_labels_para_telas_crud,
         livro_obj=livro_obj
     )

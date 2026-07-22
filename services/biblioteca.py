@@ -34,3 +34,6 @@ class Biblioteca:
             if termo.lower() in livro.to_dict().get(buscar_por, '').lower():
                 resultados.append(livro)
         return resultados
+    
+    def obter_livro_por_id(self, id:int):
+        return self.livros.get(f'{id}', None)

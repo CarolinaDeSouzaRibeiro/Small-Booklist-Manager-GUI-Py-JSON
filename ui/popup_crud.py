@@ -3,9 +3,10 @@ import tkinter as tk
 from tkinter import ttk
 from ui.app import start_ui
 from util.ui_util import atualizar_estado_combobox
+from ui.tabela import inserir_livro_tabela
 
-def subbtn_salvar_livro(root, biblioteca, livro, titulo, autor, categoria, ano, lido, avaliacao, tela_popup, is_edicao:bool):
-        livro_atualizado_dict = {
+def subbtn_salvar_livro(root, biblioteca, tabela_livros, livro, titulo, autor, categoria, ano, lido, avaliacao, tela_popup, is_edicao:bool):
+        livro_dict = {
             'titulo': titulo,
             'autor': autor,
             'categoria': categoria,
@@ -15,14 +16,15 @@ def subbtn_salvar_livro(root, biblioteca, livro, titulo, autor, categoria, ano, 
         }
 
         if is_edicao:
-            biblioteca.editar_livro(livro.id, livro_atualizado_dict)
+            biblioteca.editar_livro(livro.id, livro_dict)
+            start_ui(root)
         else:
-            biblioteca.adicionar_livro(livro_atualizado_dict)
+            biblioteca.adicionar_livro(livro_dict)
+            inserir_livro_tabela(tabela_livros, livro_dict)
 
         tela_popup.destroy()
-        start_ui(root)
 
-def popup_crud_livro(biblioteca, root, colunas_labels_para_telas_crud, livro_obj=None):
+def popup_crud_livro(root, biblioteca, tabela_livros, colunas_labels_para_telas_crud, livro_obj=None):
     '''Para adição (Create) e edição (Update) de livros pela GUI.
     Considerado adição se nenhum livro pre-existente for passado em livro_obj
     '''
@@ -67,6 +69,7 @@ def popup_crud_livro(biblioteca, root, colunas_labels_para_telas_crud, livro_obj
         command=lambda: subbtn_salvar_livro(
                 root,
                 biblioteca,
+                tabela_livros,
                 livro_obj,
                 entries['titulo'].get(),
                 entries['autor'].get(),
