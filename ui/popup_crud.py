@@ -37,7 +37,7 @@ def popup_crud_livro(biblioteca, root, colunas_labels_para_telas_crud, livro_obj
         tk.Label(tela_popup, text=f"{label}:").pack()
         entry = tk.Entry(tela_popup)
         if livro_obj:
-            entry.insert(0, getattr(livro_obj, atrib))
+            entry.insert(0, getattr(livro_obj, atrib, ""))
         entries[atrib] = entry
         entry.pack()
 
