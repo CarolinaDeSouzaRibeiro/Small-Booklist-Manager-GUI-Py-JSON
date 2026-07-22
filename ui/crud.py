@@ -1,8 +1,8 @@
 from services.biblioteca import Biblioteca
 import tkinter as tk
 from tkinter import ttk
-from ui.app import start_ui
-from util.ui_util import get_livro_from_table_selection, atualizar_estado_combobox
+from ui.app import start_tela_principal
+from util.ui_util import get_livro_from_table_selection, atualizar_estado_combo_e_btn
 from ui.popup_crud import popup_crud_livro
 
 def onclick_btn_add_livro(root, biblioteca, tabela_livros, colunas_labels_para_telas_crud):

@@ -14,7 +14,7 @@ def get_livro_from_table_selection(tabela_livros):
         return None, None
 
 
-def atualizar_estado_combobox(avaliacao_combobox, lido_var, avaliacao_var, btn):
+def atualizar_estado_combo_e_btn(avaliacao_combobox, lido_var, avaliacao_var, btn):
     '''Modifica estado da combobox de avaliação e do botão de salvar com base na avaliação e se o livro foi lido ou não
 
     Impede acesso ao combobox caso o livro não tenha sido marcado como lido.

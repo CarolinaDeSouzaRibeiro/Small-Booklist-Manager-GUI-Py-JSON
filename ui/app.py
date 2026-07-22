@@ -1,10 +1,11 @@
-def start_ui(oldroot=None):
+from ui.tabela.tabela_criacao import criar_headers, popular_tabela
+
+def start_tela_principal(oldroot=None):
     from services.biblioteca import Biblioteca
     import tkinter as tk
     from tkinter import ttk
 
-    if oldroot:
-        oldroot.destroy()
+    if oldroot: oldroot.destroy()
 
     biblioteca = Biblioteca()
 
@@ -17,16 +18,8 @@ def start_ui(oldroot=None):
     tabela_livros = ttk.Treeview(newroot, columns=list(colunas_labels.values()), show='headings')
 
     tabela_livros.pack(expand=True, fill='both')
-
-    #cria tabela
-    for label, col_id in colunas_labels.items():
-        tabela_livros.heading(col_id, text=label)
-        tabela_livros.column(col_id, width=100)
-
-
-    #popula tabela
-    for livro in biblioteca.livros.values():
-        tabela_livros.insert("", "end", values=(livro.titulo, livro.autor, livro.categoria, livro.ano, livro.lido, livro.avaliacao, livro.data_cadastro, livro.id))
+    criar_headers(colunas_labels, tabela_livros)
+    popular_tabela(biblioteca.livros, tabela_livros)
 
     colunas_labels_para_telas_crud= {'Titulo':'titulo', 'Autor':'autor', 'Categoria':'categoria', 'Ano':'ano'}
 

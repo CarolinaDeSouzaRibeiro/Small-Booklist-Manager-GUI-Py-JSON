@@ -1,26 +1,17 @@
-from services.biblioteca import Biblioteca
+from models.livro import Livro
 import tkinter as tk
 from tkinter import ttk
-from ui.app import start_ui
-from util.ui_util import atualizar_estado_combobox
-from ui.tabela import inserir_livro_tabela
+from ui.tabela.tabela_manuseio import inserir_livro_tabela
+from util.ui_util import atualizar_estado_combo_e_btn
+from ui.tabela.tabela_manuseio import editar_livro_tabela
 
-def subbtn_salvar_livro(root, biblioteca, tabela_livros, livro, titulo, autor, categoria, ano, lido, avaliacao, tela_popup, is_edicao:bool):
-        livro_dict = {
-            'titulo': titulo,
-            'autor': autor,
-            'categoria': categoria,
-            'ano': int(ano),
-            'lido': bool(lido),
-            'avaliacao': int(avaliacao) if avaliacao else None,
-        }
-
-        if is_edicao:
-            biblioteca.editar_livro(livro.id, livro_dict)
-            start_ui(root)
+def subbtn_salvar_livro(novo_livro:dict, biblioteca, tabela_livros:ttk.Treeview, tela_popup:tk.Toplevel, livro_og:Livro=None):
+        if livro_og:
+            biblioteca.editar_livro(livro_og.id, novo_livro)
+            editar_livro_tabela(tabela_livros, livro_og.id, novo_livro)
         else:
-            biblioteca.adicionar_livro(livro_dict)
-            inserir_livro_tabela(tabela_livros, livro_dict)
+            biblioteca.adicionar_livro(novo_livro)
+            inserir_livro_tabela(tabela_livros, novo_livro)
 
         tela_popup.destroy()
 
@@ -43,22 +34,20 @@ def popup_crud_livro(root, biblioteca, tabela_livros, colunas_labels_para_telas_
         entries[atrib] = entry
         entry.pack()
 
-    #para avaliação, cria um combobox com opções de 1 a 5, e apenas disponivel se lido for verdadeiro
-    #mas nao da pack ainda
+    #combobox avaliacao
+    #(não pode dar pack antes do checkbox lido setado)
     avaliacao_var = tk.StringVar(value=getattr(livro_obj, 'avaliacao', ""))
     avaliacao_combobox = ttk.Combobox(tela_popup, textvariable=avaliacao_var, values=[i for i in range(1, 6)], state="readonly")
-    #evento de atualizacao de estado é trigado ao mudar combobox
-    avaliacao_combobox.bind("<<ComboboxSelected>>", lambda event: atualizar_estado_combobox(avaliacao_combobox, lido_var, avaliacao_var, btn_salvaradd))
+
+    #evento de atualizar estados, ao mudar seleção.
+    avaliacao_combobox.bind("<<ComboboxSelected>>", lambda event: atualizar_estado_combo_e_btn(avaliacao_combobox, lido_var, avaliacao_var, btn_salvaradd))
 
     #checkbox de lido
     lido_var = tk.BooleanVar(value=getattr(livro_obj, 'lido', False))
-    tk.Label(tela_popup, text="Lido:").pack()
-    tk.Checkbutton(tela_popup, text="Lido", variable=lido_var, command=lambda: atualizar_estado_combobox(avaliacao_combobox, lido_var, avaliacao_var, btn_salvaradd)).pack()
+    tk.Checkbutton(tela_popup, text="Lido", variable=lido_var, command=lambda: atualizar_estado_combo_e_btn(avaliacao_combobox, lido_var, avaliacao_var, btn_salvaradd)).pack()
 
-    #label da combobox de avaliação
+    #combobox de avaliação
     tk.Label(tela_popup, text="Avaliação:").pack()
-
-    #ao habilitar/desabilitar o checkbutton, atualiza estado da combobox
     avaliacao_combobox.pack()
 
     #Botão de salvar/adicionar.
@@ -67,20 +56,26 @@ def popup_crud_livro(root, biblioteca, tabela_livros, colunas_labels_para_telas_
         tela_popup,
         text="Salvar" if livro_obj else "Adicionar",
         command=lambda: subbtn_salvar_livro(
-                root,
-                biblioteca,
-                tabela_livros,
-                livro_obj,
-                entries['titulo'].get(),
-                entries['autor'].get(),
-                entries['categoria'].get(),
-                entries['ano'].get(),
-                lido_var.get(),
-                avaliacao_var.get(),
-                tela_popup,
-                is_edicao=bool(livro_obj) # True se for edição, False se for adição de novo livro
+                novo_livro = popup_inputs_to_dict(entries, lido_var, avaliacao_var),
+                biblioteca = biblioteca,
+                tabela_livros = tabela_livros,
+                tela_popup = tela_popup,
+                livro_og = livro_obj
             )
         )
     btn_salvaradd.pack(pady=10)
 
-    atualizar_estado_combobox(avaliacao_combobox, lido_var, avaliacao_var, btn_salvaradd) #atualizacao inicial
+    atualizar_estado_combo_e_btn(avaliacao_combobox, lido_var, avaliacao_var, btn_salvaradd) #atualizacao inicial
+
+
+
+def popup_inputs_to_dict(entries_dict, lido_var, avaliacao_var):
+    '''Converte o dicionário de entradas principais e as variáveis de estado em um dicionário de valores formatado para a biblioteca'''
+    return {
+        'titulo': entries_dict['titulo'].get(),
+        'autor': entries_dict['autor'].get(),
+        'categoria': entries_dict['categoria'].get(),
+        'ano': int(entries_dict['ano'].get()),
+        'lido': bool(lido_var.get()),
+        'avaliacao': int(avaliacao_var.get()) if avaliacao_var.get() else None,
+    }
